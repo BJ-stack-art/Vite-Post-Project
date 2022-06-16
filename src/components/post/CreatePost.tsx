@@ -9,15 +9,11 @@ interface CreatePostProps {
 
 const CreatePost: React.FC<CreatePostProps> = (props) => {
   const { addPostHandler } = props;
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<IPost>();
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const payload = {
-        title: data.title,
-        body: data.body,
-      };
-      const response = await createPost(payload);
+      const response = await createPost(data);
       addPostHandler(response.data);
     } catch (error) {
       console.log(error);
